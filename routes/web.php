@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Telegram\Bot\Laravel\Facades\Telegram;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/webhook', 'App\Http\Controllers\WebhookController@setWebhook');
+
+Route::post(Telegram::getAccessToken(), 'App\Http\Controllers\TelegramBot\Host@host')->name('webhook');
