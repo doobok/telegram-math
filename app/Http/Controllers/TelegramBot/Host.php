@@ -9,20 +9,15 @@ use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram;
-use App\Option;
-use App\TelegramState;
-use App\Http\Controllers\Telegram\StudentsBotController;
-use App\Http\Controllers\Telegram\TutorsBotController;
-use App\Http\Controllers\Telegram\SheduleBotController;
-use App\Http\Controllers\Telegram\ReportsBotController;
 use App\Models\User;
 use App\Models\Message;
+use App\Jobs\TelegramInbox;
 
 class Host extends Controller
 {
     public function host()
     {
-      try {
+      // try {
 
 
 
@@ -32,6 +27,13 @@ class Host extends Controller
       // $update = Telegram::commandsHandler(true);
       $upMessage = $update->getMessage();
       $upUser = $upMessage->getFrom();
+
+      Log::info($update);
+
+      // Telegram::bot()->sendMessage([
+      //   'chat_id' => $upUser->getId(),
+      // ]);
+
 
 
       $user = User::firstOrNew([
@@ -44,19 +46,19 @@ class Host extends Controller
 
       $type = $upMessage->detectType();
       //
-      // // Log::info(gettype($type));
-      // // Log::info(gettype($upMessage));
-      //
+      // Log::info(gettype($type));
+      // Log::info(gettype($upMessage));
+
       $message = Message::create([
         'user_id' => $user->id,
         'chat_id' => $upUser->getId(),
         'message_id' => $upMessage->getMessageId(),
         'type' => $type,
-        // 'data' => '123',
-        // 'text' => $upMessage->getText(),
         'data' => $upMessage->$type,
       ]);
       $message->save();
+
+      TelegramInbox::dispatch($message);
 
       // Log::info($upMessage->detectType());
 
@@ -90,20 +92,40 @@ class Host extends Controller
       // Log::info( $contact->getUserId() );
 
 
-      Telegram::bot()->sendMessage([
-        'chat_id' => 239268837,
-        'text' => 'Hello!',
+      Telegram::bot()->sendChatAction([
+        'chat_id' => $upUser->getId(),
+        'action' => Actions::TYPING
       ]);
 
 
-      } catch (\Exception $e) {
-        Log::info('false');
-        Log::info($e);
 
-      }
+          $keyboard = [
+            [
+              ['text'=>'📞 Відправити номер телефону','request_contact'=>true ],
+            ],
+          ];
 
-      // $this->replyWithMessage('answer!');
+        Telegram::bot()->sendMessage([
+        'chat_id' => $upUser->getId(),
+        'text' => 'Для продовження поділись своїм номером телефону, використай відповідну кнопку',
+        'reply_markup' => Keyboard::make([
+          'keyboard' => $keyboard,
+          // 'inline_keyboard' => $keyboard,
+          'resize_keyboard' => true,
+          'one_time_keyboard' => true
+        ]),
+      ]);
 
-      // code...
+
+
+
+
+
+      // } catch (\Exception $e) {
+      //   Log::info('false');
+      //   Log::info($e);
+      //
+      // }
+
     }
 }
