@@ -10,10 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Message;
 use Illuminate\Support\Facades\Log;
-use Telegram\Bot\Actions;
-use Telegram\Bot\Commands\Command;
-use Telegram\Bot\Keyboard\Keyboard;
-use Telegram;
+use App\Http\Controllers\TelegramBot\Router;
 
 
 class TelegramInbox implements ShouldQueue
@@ -26,11 +23,11 @@ class TelegramInbox implements ShouldQueue
      * @return void
      */
 
-    protected $msg;
+    protected $instance;
 
-    public function __construct( $msg)
+    public function __construct(Message $instance)
     {
-       $this->msg = $msg;
+       $this->instance = $instance;
     }
 
     /**
@@ -40,27 +37,12 @@ class TelegramInbox implements ShouldQueue
      */
     public function handle()
     {
-      Log::alert('START');
+      // static
+      Router::index($this->instance);
 
-      if ($this->msg->type === 'contact') {
-        Log::alert('IS Contact');
-
-        Telegram::bot()->sendMessage([
-          'chat_id' => 239268837,
-          'text' => 'Дякуэмо за авторизацію',
-        ]);
-      } else {
-        Log::alert('IS NO Contact');
-
-        Telegram::bot()->sendMessage([
-          'chat_id' => 239268837,
-          'text' => 'Це не номер телефону',
-        ]);
-      }
-      Log::alert('END..');
-
-      // Log::alert('In INBOX msg ID:' . $this->msg->id);
-      // Log::alert($this->msg->id);
+      // non static
+      // $task = new Router;
+      // $task->index($this->instance);
 
     }
 }
