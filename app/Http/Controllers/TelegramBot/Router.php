@@ -4,15 +4,15 @@ namespace App\Http\Controllers\TelegramBot;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log; //Log
 use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram;
 use Illuminate\Support\Str;
 use App\Http\Controllers\TelegramBot\Authorization;
-use App\Http\Controllers\TelegramBot\Commands\Command;
-use App\Http\Controllers\TelegramBot\Requests\Request;
+use App\Http\Controllers\TelegramBot\Commands\Commands;
+use App\Http\Controllers\TelegramBot\Requests\Requests;
 
 class Router extends Controller
 {
@@ -20,10 +20,10 @@ class Router extends Controller
     {
         switch ($payload->type) {
           case 'text':
-            if (Str::startsWith($payload->type, '/' )) {
-
+            if (Str::startsWith($payload->data, '/' )) {
+              Commands::index($payload);
             } else {
-              // code...
+              Requests::index($payload);
             }
             break;
           case 'contact':
