@@ -33,7 +33,7 @@ class Router extends Controller
           default:
             Telegram::bot()->sendMessage([
               'chat_id' => $payload->chat_id,
-              'text' => 'На жаль, я поки що не можу опрацювати запити такого типу ☺️ будь-ласка, повтори спробу з правильними даними',
+              'text' => __('bot.unknown-message-type'),
             ]);
             break;
         }

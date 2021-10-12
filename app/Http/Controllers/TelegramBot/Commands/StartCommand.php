@@ -11,13 +11,11 @@ use Illuminate\Support\Str;
 
 class StartCommand extends Commands
 {
-    public static function start($payload)
+    public static function go($payload)
     {
       $user = User::find($payload->user_id);
 
       if (!$user->phone_number) {
-
-        $text = sprintf('👋 Привіт, %s! ' . PHP_EOL . 'Мене звати БОТ, я можу допомогти тобі, але для початку відправ мені свій номер телефону', $user->first_name);
 
             $keyboard = [
               [
@@ -27,7 +25,10 @@ class StartCommand extends Commands
 
           Telegram::bot()->sendMessage([
             'chat_id' => $payload->chat_id,
-            'text' => $text,
+            'text' => __('bot.hello', [
+              'username' => $user->first_name,
+              'botname' => config('telegram.bots.mybot.username'),
+            ]),
             'reply_markup' => Keyboard::make([
               'keyboard' => $keyboard,
               'resize_keyboard' => true,
@@ -36,11 +37,12 @@ class StartCommand extends Commands
           ]);
 
       } else {
-        $text = sprintf('👋 Привіт, %s! ' . PHP_EOL . 'Мене звати БОТ, я володію корисними навиками, я готовий допомогти тобі відповідно до привілегій твоєї ролі.' . PHP_EOL . ' Твоя поточна роль: %s ', $user->first_name, $user->role);
-
         Telegram::bot()->sendMessage([
           'chat_id' => $payload->chat_id,
-          'text' => $text,
+          'text' => __('bot.hello-with-role', [
+            'username' => $user->first_name,
+            'role' => __('bot.role-' . $user->role),
+          ]),
         ]);
       }
 

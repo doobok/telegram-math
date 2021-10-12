@@ -50,68 +50,8 @@ class Host extends Controller
           'action' => Actions::TYPING
         ]);
 
-      // Log::info($upMessage->detectType());
-
-
-
-      //
-      // Log::info($update);
-      //
-      // Log::info('Message');
-      // $message = $update->getMessage();
-      // Log::info($message);
-      //
-      // Log::info('Type');
-      // $type = $message->detectType();
-      // Log::info($type);
-      //
-      // Log::info('user');
-      // $user = $message->getFrom();
-      // Log::info($user);
-      //
-      // Log::info( $user->getId() );
-      // Log::info( $user->getFirstName() );
-      // Log::info( $user->getLastName() );
-      // Log::info( $user->getUsername() );
-      //
-      // Log::info('user');
-
-      // $contact = $message->getContact();
-      // Log::info( $contact );
-      // Log::info( $contact->getPhoneNumber() );
-      // Log::info( $contact->getUserId() );
-
-
-
-
-
-
-      //     $keyboard = [
-      //       [
-      //         ['text'=>'📞 Відправити номер телефону','request_contact'=>true ],
-      //       ],
-      //     ];
-      //
-      //   Telegram::bot()->sendMessage([
-      //   'chat_id' => $upUser->getId(),
-      //   'text' => 'Для продовження поділись своїм номером телефону, використай відповідну кнопку',
-      //   'reply_markup' => Keyboard::make([
-      //     'keyboard' => $keyboard,
-      //     // 'inline_keyboard' => $keyboard,
-      //     'resize_keyboard' => true,
-      //     'one_time_keyboard' => true
-      //   ]),
-      // ]);
-
-
-
-
-
-
       } catch (\Exception $e) {
-        Log::info('false get WEBHOOK data');
         Log::info($e);
       }
-
     }
 }
