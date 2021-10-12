@@ -4,6 +4,7 @@ namespace App\Http\Controllers\TelegramBot;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Telegram\Bot\Keyboard\Keyboard;
 use Telegram;
 use Illuminate\Support\Facades\Log; //Log
 use Illuminate\Support\Str;
@@ -24,22 +25,16 @@ class Authorization extends Controller
         if ($user->phone_number != $phone) {
           $user->phone_number = $phone;
           $user->save();
-          Log::info('phone updated');
         }
-
-        Log::info( $payload->data );
-        // Log::info( gettype($payload->data) );
-        // Log::info( gettype($data) );
-
-        $text = '✅ Номер телефону ' . $phone . ' успішно додано до користувача';
-
+        $text = 'success';
       } else {
-        $text = '⚠️ Помилка: ' . PHP_EOL . ' Відправте власний номер телефону!';
+        $text = 'error';
       }
       // send message
       Telegram::bot()->sendMessage([
         'chat_id' => $payload->chat_id,
-        'text' => $text,
+        'text' => __('bot.auth-' . $text),
+        'reply_markup' => Keyboard::remove(),
       ]);
     }
 }

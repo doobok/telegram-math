@@ -15,25 +15,15 @@ class Commands extends Router
       Log::debug($command[0]);
 
       switch ($command[0]) {
-        case '/start':
-            StartCommand::go($payload);
-          break;
-        case '/help':
-            HelpCommand::go($payload);
-          break;
-        case '/test':
-            TestCommand::go($payload);
-          break;
+        case '/start':    StartCommand::go($payload);     break;
+        case '/help':     HelpCommand::go($payload);      break;
+        case '/test':     TestCommand::go($payload);      break;
 
         default:
-        Log::debug('its default');
-
             Telegram::bot()->sendMessage([
               'chat_id' => $payload->chat_id,
               'text' => __('bot.unknown-command'),
             ]);
-            Log::debug('its sended message');
-
           break;
       }
     }

@@ -17,6 +17,5 @@ class Callbacks extends Router
       ]);
       Log::info('is a callback (callbacks)');
 
-      // code...
     }
 }
