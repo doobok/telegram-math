@@ -20,9 +20,34 @@ class Host extends Controller
       try {
         // полчаем сообщение от WEBHOOK
         $update = Telegram::getWebhookUpdates();
-        // достаем само сообщение и отправителя
+        // пытаемся получить callback и сообщение
+        $upCallback = $update->getCallbackQuery();
         $upMessage = $update->getMessage();
-        $upUser = $upMessage->getFrom();
+        // если это колбек - задаем переменные
+        if ($upCallback) {
+          // пользователя
+          $upUser = $upCallback->getFrom();
+          // сообщения
+          $message_id = -1;
+          $type = 'callback';
+          $data = $upCallback->getData();
+          // возвращаем сообщение об успешном получении колбэка
+          Telegram::bot()->answerCallbackQuery([
+            'callback_query_id' => $upCallback->getId(),
+          ]);
+        // иначе проверяем наличие сообщения и задаем переменные из сообщения
+        } else if ($upMessage) {
+          // пользователь
+          $upUser = $upMessage->getFrom();
+          // сообщение
+          $message_id = $upMessage->getMessageId();
+          $type = $upMessage->detectType();
+          $data = $upMessage->$type;
+        // запасной вариант - прекращаем скрипт
+        } else {
+          exit;
+        }
+
         // формируем и сохраняем пользователя, если отсутствует
         $user = User::firstOrNew([
           'chat_id' => $upUser->getId(),
@@ -31,15 +56,13 @@ class Host extends Controller
           'username' => $upUser->getUsername(),
         ]);
         $user->save();
-        // отправляем тип сообщения
-        $type = $upMessage->detectType();
         // формируем и сохраняем сообщение
         $message = Message::create([
           'user_id' => $user->id,
           'chat_id' => $upUser->getId(),
-          'message_id' => $upMessage->getMessageId(),
+          'message_id' => $message_id,
           'type' => $type,
-          'data' => $upMessage->$type,
+          'data' => $data,
         ]);
         $message->save();
         // добавляем сообщение в очередь на обработку
