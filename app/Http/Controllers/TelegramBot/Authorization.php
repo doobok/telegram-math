@@ -15,15 +15,18 @@ class Authorization extends Controller
 {
     public static function auth($payload)
     {
+      // получаем данные
       $data = json_decode($payload->data);
-
-
+      // проверяем сответствие контакта ID пользователя
       if (isset($data->user_id) and $payload->chat_id === $data->user_id) {
         $phone = Str::after($data->phone_number, '+');
-
+        // получаем пользователя и добавляем номер телефона
         $user = User::find($payload->user_id);
         if ($user->phone_number != $phone) {
           $user->phone_number = $phone;
+          /*
+          дополнительные действия по определению роли пользователя
+          */
           $user->save();
         }
         $text = 'success';
@@ -35,6 +38,14 @@ class Authorization extends Controller
         'chat_id' => $payload->chat_id,
         'text' => __('bot.auth-' . $text),
         'reply_markup' => Keyboard::remove(),
+      ]);
+    }
+
+    public static function noAccess($chat_id)
+    {
+      Telegram::bot()->sendMessage([
+        'chat_id' => $chat_id,
+        'text' => __('bot.auth-no-access'),
       ]);
     }
 }

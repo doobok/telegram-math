@@ -15,7 +15,7 @@ class StartCommand extends Commands
     {
       $user = User::find($payload->user_id);
 
-      if ($user->phone_number) {
+      if (!$user->phone_number) {
 
             $keyboard = [
               [

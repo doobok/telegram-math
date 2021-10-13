@@ -45,7 +45,7 @@ class Host extends Controller
           $data = $upMessage->$type;
         // запасной вариант - прекращаем скрипт
         } else {
-          exit;
+          return;
         }
 
         // формируем и сохраняем пользователя, если отсутствует
