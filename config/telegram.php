@@ -48,6 +48,12 @@ return [
         //        ],
     ],
 
+    'host' => [
+      'cli_url' => env('HOST_CLI_URL', false),
+      'cli_id' => env('HOST_CLI_ID', false),
+      'cli_secret' => env('HOST_CLI_SECRET', false),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Bot Name
