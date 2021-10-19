@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\TelegramBot\Commands;
 
 use App\Http\Controllers\TelegramBot\Commands\Commands;
-use Telegram\Bot\Keyboard\Keyboard;
-use Telegram;
 use App\Models\User;
 use Illuminate\Support\Facades\Log; //Log
 use Illuminate\Support\Str;
+use App\Models\Sending;
+use App\Jobs\TelegramOutbox;
 
 class StartCommand extends Commands
 {
@@ -18,32 +18,33 @@ class StartCommand extends Commands
       if (!$user->phone_number) {
 
             $keyboard = [
-              [
-                [ 'text' => __('bot.button-send-phone'), 'request_contact' => true, ],
-              ],
-            ];
+              'resize_keyboard' => true,
+              'one_time_keyboard' => true,
+              'keyboard' => [
+                [
+                  [ 'text' => __('bot.button-send-phone'), 'request_contact' => true, ],
+                ],
+              ]];
 
-          Telegram::bot()->sendMessage([
+          $sending = Sending::create([
             'chat_id' => $payload->chat_id,
             'text' => __('bot.hello', [
               'username' => $user->first_name,
               'botname' => config('telegram.bots.mybot.username'),
             ]),
-            'reply_markup' => Keyboard::make([
-              'keyboard' => $keyboard,
-              'resize_keyboard' => true,
-              'one_time_keyboard' => true
-            ]),
+            'keyboard' => json_encode($keyboard),
           ]);
+          TelegramOutbox::dispatch($sending);
 
       } else {
-        Telegram::bot()->sendMessage([
+        $sending = Sending::create([
           'chat_id' => $payload->chat_id,
           'text' => __('bot.hello-with-role', [
             'username' => $user->first_name,
             'role' => __('bot.role-' . $user->role),
           ]),
         ]);
+        TelegramOutbox::dispatch($sending);
       }
 
     }

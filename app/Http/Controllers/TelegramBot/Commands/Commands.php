@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\TelegramBot\Commands;
 
 use App\Http\Controllers\TelegramBot\Router;
-use Telegram;
 use Illuminate\Support\Facades\Log; //Log
 use Illuminate\Support\Str;
+use App\Models\Sending;
+use App\Jobs\TelegramOutbox;
 
 class Commands extends Router
 {
@@ -20,10 +21,11 @@ class Commands extends Router
         case '/test':     TestCommand::go($payload);      break;
 
         default:
-            Telegram::bot()->sendMessage([
+            $sending = Sending::create([
               'chat_id' => $payload->chat_id,
               'text' => __('bot.unknown-command'),
             ]);
+            TelegramOutbox::dispatch($sending);
           break;
       }
     }

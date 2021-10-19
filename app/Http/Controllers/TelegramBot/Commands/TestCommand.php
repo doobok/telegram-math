@@ -4,8 +4,6 @@ namespace App\Http\Controllers\TelegramBot\Commands;
 
 use App\Http\Controllers\TelegramBot\Commands\Commands;
 use App\Http\Controllers\TelegramBot\Authorization;
-use Telegram\Bot\Keyboard\Keyboard;
-use Telegram;
 use App\Models\User;
 use Illuminate\Support\Facades\Log; //Log
 use Illuminate\Support\Str;
@@ -48,7 +46,6 @@ class TestCommand extends Commands
                 [
                   [ 'text' => 'Тестова кнопка', 'callback_data' => 'something', ],
                   [ 'text' => 'Тестова кнопка 2', 'callback_data' => 'something', ],
-                  [ 'text' => 'Тестова кнопка 3', 'callback_data' => 'something', ],
                 ],
               ]];
 
@@ -58,6 +55,13 @@ class TestCommand extends Commands
           'keyboard' => json_encode($keyboard),
         ]);
         TelegramOutbox::dispatch($sending);
+
+        // $sending = Sending::create([
+        //   'chat_id' => $payload->chat_id,
+        //   'text' => 'Remove Keyboard',
+        //   'keyboard' => 'remove',
+        // ]);
+        // TelegramOutbox::dispatch($sending);
 
 
 

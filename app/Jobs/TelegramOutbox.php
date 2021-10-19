@@ -36,14 +36,35 @@ class TelegramOutbox implements ShouldQueue
      */
     public function handle()
     {
-
-      $markup = Keyboard::make(json_decode($this->instance->keyboard));
-
-      Telegram::sendMessage([
-          'chat_id' => $this->instance->chat_id,
-          'text' => $this->instance->text,
-          'reply_markup' => $markup,
-        ]);
-
+      // создаем коллекцию сообщения с ID чата
+      $message = collect([
+        'chat_id' => $this->instance->chat_id,
+      ]);
+      // если есть текст то добавляем его
+      if ($this->instance->text) {
+        $message->put('text', $this->instance->text);
+      }
+      // если есть клавиатура - обрабатываем
+      if ($this->instance->keyboard) {
+        // проверка на команду удаления
+        if ($this->instance->keyboard === 'remove') {
+          $markup = Keyboard::remove();
+          $message->put('reply_markup', $markup);
+        // иначе пытаемся собрать клавиатуру
+        } else {
+          try {
+            $markup = Keyboard::make(json_decode($this->instance->keyboard));
+            $message->put('reply_markup', $markup);
+          } catch (\Exception $e) {
+            Log::info($e);
+          }
+        }
+      }
+      // отправляем сообщение
+      Telegram::sendMessage(
+        $message->all()
+      );
+      // удаляем запись в бд
+      // Sending::find($this->instance->id)->delete();
     }
 }

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('username')->nullable();
             $table->string('role')->default('guest');
+            $table->integer('external_id')->nullable();
             $table->string('phone_number')->nullable();
 
             $table->timestamps();

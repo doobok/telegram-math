@@ -5,15 +5,13 @@ namespace App\Http\Controllers\TelegramBot;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; //Log
-use Telegram\Bot\Actions;
-use Telegram\Bot\Commands\Command;
-use Telegram\Bot\Keyboard\Keyboard;
-use Telegram;
 use Illuminate\Support\Str;
 use App\Http\Controllers\TelegramBot\Authorization;
 use App\Http\Controllers\TelegramBot\Commands\Commands;
 use App\Http\Controllers\TelegramBot\Requests\Requests;
 use App\Http\Controllers\TelegramBot\Callbacks\Callbacks;
+use App\Models\Sending;
+use App\Jobs\TelegramOutbox;
 
 class Router extends Controller
 {
@@ -40,10 +38,11 @@ class Router extends Controller
 
           default:
             // сообщаем об отсутствии поддержки типа данных
-            Telegram::bot()->sendMessage([
+            $sending = Sending::create([
               'chat_id' => $payload->chat_id,
               'text' => __('bot.unknown-message-type'),
             ]);
+            TelegramOutbox::dispatch($sending);
             break;
         }
 
