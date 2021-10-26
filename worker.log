@@ -1,0 +1,198 @@
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+42 vendor frames [22m
+  43  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[HY000] [2002] Connection refused (SQL: select * from `cache` where `key` = laravel_cacheilluminate:queue:restart limit 1)
+
+  at /home/yura/Laravel/telegram-math/vendor/laravel/framework/src/Illuminate/Database/Connection.php:703
+    699▕         // If an exception occurs when attempting to run a query, we'll format the error
+    700▕         // message to include the bindings with SQL, which will make this exception a
+    701▕         // lot more helpful to the developer instead of just the database's errors.
+    702▕         catch (Exception $e) {
+  ➜ 703▕             throw new QueryException(
+    704▕                 $query, $this->prepareBindings($bindings), $e
+    705▕             );
+    706▕         }
+    707▕     }
+
+      [2m+40 vendor frames [22m
+  41  /home/yura/Laravel/telegram-math/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+[2021-10-26 09:13:00][67] Processing: App\Jobs\TelegramInbox
+[2021-10-26 09:13:00][67] Processed:  App\Jobs\TelegramInbox
+[2021-10-26 09:13:00][68] Processing: App\Jobs\TelegramOutbox
+[2021-10-26 09:13:00][68] Processed:  App\Jobs\TelegramOutbox
+[2021-10-26 09:14:45][69] Processing: App\Jobs\TelegramInbox
+[2021-10-26 09:14:45][69] Processed:  App\Jobs\TelegramInbox
+[2021-10-26 09:14:45][70] Processing: App\Jobs\TelegramOutbox
+[2021-10-26 09:14:45][70] Processed:  App\Jobs\TelegramOutbox
